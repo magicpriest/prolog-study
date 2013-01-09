@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>Библиотека учебных материалов</title>
+  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript">
+    function nl2br(input_string)
+    {
+      return input_string.replace(/(\r\n|\r|\n)/g, '<br>');
+    }
+
+    $(document).ready(function(){
+      $('#submit').click(function() {
+
+        var rString = 'r=' + $('#r').val();
+        var fString = 'f=' + $('#f').val();
+
+        $.ajax({
+          type : 'GET',
+          url : 'nf?' + rString + '&' + fString,
+          success : function(text) { $('#nf').html(text); }
+        });
+
+        $.ajax({
+          type : 'GET',
+          url : 'fmin?' + fString,
+          success : function(text) { $('#fmin').html(nl2br(text));  }
+        });
+
+        $.ajax({
+          type : 'GET',
+          url : 'keys?' + rString + '&' + fString,
+          success : function(text) { $('#keys').html(text); }
+        });
+
+        $.ajax({
+          type : 'GET',
+          url : 'primaryattributes?' + rString + '&' + fString,
+          success : function(text) { $('#primaryattributes').html(text); }
+        });
+
+        $.ajax({
+          type : 'GET',
+          url : 'secondaryattributes?' + rString + '&' + fString,
+          success : function(text) { $('#secondaryattributes').html(text); }
+        });
+
+        $.ajax({
+          type : 'GET',
+          url : 'bcnfs?' + rString + '&' + fString,
+          success : function(text) { $('#bcnfs').html(nl2br(text)); }
+        });
+
+        $.ajax({
+          type : 'GET',
+          url : 'd3nfs?' + rString + '&' + fString,
+          success : function(text) { $('#d3nfs').html(nl2br(text)); }
+        });
+
+        $.ajax({
+          type : 'GET',
+          url : 'algebra',
+          success : function(text) { $('#algebra').html(nl2br(text)); }
+        });
+        return false;
+      });
+    });
+  </script>
+  <script>
+    window.onload = (function(){
+    try{
+        $("#showr").click(function () {
+        $("#submit").show("fast");
+        });
+        
+    }catch(e){}});
+  </script>
+  <style type="text/css">
+  body{margin: 25px;};
+  </style>
+</head>
+
+<body>
+  <h1>Библиотека учебных материалов</h1>
+  <div id="form_wrapper">
+    <legend>Выбрать необходимый раздел</legend>
+      <div class="discipline">
+        <div><a id="showr">Алгебра и геометрия</a> <input style="display: none" type="submit" name="submit" id="submit" value="Получить материалы" /></div>
+        <div>
+          
+        </div>
+      </div>
+  </div>
+  <div>
+    <legend>Доступные материалы</legend>
+      <div id="algebra"></div>
+  </div>
+</body>
+</html>
